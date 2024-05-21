@@ -30,6 +30,9 @@ Run the emulator with the following command:
 ## Project Structure
 
   emulator/: Contains the core emulator logic.
+  
   logger/: Manages logging functionalities.
+  
   pbft/: Implements the PBFT consensus algorithm.
+  
   main.go: Entry point of the application.
