@@ -1,0 +1,38 @@
+PBFTNode Struct:
+
+Represents a node in the PBFT network.
+ID: Each node has a unique identifier within the network.
+TotalNodes: Indicates the total number of nodes in the PBFT network.
+PrepareMsgs: A data structure to store Prepare messages indexed by sequence number. Prepare messages are sent by nodes to signal agreement on a PrePrepare message.
+CommitMsgs: A data structure to store Commit messages indexed by sequence number. Commit messages are sent by nodes to signal agreement on Prepare messages.
+mu: A mutex used for synchronizing access to shared data structures, ensuring thread safety in concurrent operations.
+
+Messages:
+
+PrePrepareMessage:
+
+Block: Represents a block in the blockchain, typically containing transaction data.
+View: Indicates the current view of the PBFT system. Views are used to manage the consensus process and handle view changes.
+Seq: Sequence number of the message, used to order messages within a view.
+
+PrepareMessage:
+
+NodeID: ID of the node sending the message.
+View: Current view of the PBFT system.
+Seq: Sequence number of the message.
+Digest: Digest of the block. Digests are cryptographic hashes computed from block data, used to uniquely identify blocks.
+
+CommitMessage:
+
+NodeID: ID of the node sending the message.
+View: Current view of the PBFT system.
+Seq: Sequence number of the message.
+Digest: Digest of the block.
+
+Explanation of the Code:
+
+The code provides an implementation of a PBFT node and message types used in the PBFT consensus algorithm.
+Each PBFT node maintains state information such as its ID, the total number of nodes in the network, and message storage for Prepare and Commit messages.
+PrePrepare, Prepare, and Commit messages are defined to facilitate the consensus process in the PBFT algorithm.
+The PBFTNode struct methods handle message reception and processing, including broadcasting Prepare and Commit messages and handling their reception.
+This implementation serves as a foundation for a distributed consensus algorithm where nodes work together to achieve agreement on the order of transactions in a blockchain.
