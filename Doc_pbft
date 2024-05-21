@@ -1,3 +1,36 @@
+Overview of PBFT Protocol:
+
+The Practical Byzantine Fault Tolerance (PBFT) protocol is a consensus algorithm used in distributed systems to achieve agreement among nodes, 
+even if some of them are faulty or malicious. PBFT is particularly suited for systems where high reliability and consistency are required.
+
+
+Example Scenario
+
+Consider a distributed banking system with four nodes (A, B, C, D), where one of them (A) is the primary, 
+and the others are replicas. The system can tolerate one faulty node.
+
+Phase 1: Pre-Prepare
+
+Client Request: A client sends a transaction request (e.g., transferring money) to the primary node A.
+Pre-Prepare Message: The primary node A assigns a sequence number to the request and broadcasts a Pre-Prepare message containing the transaction and the sequence number to all replicas (B, C, D).
+
+Phase 2: Prepare
+
+Prepare Message: When replicas B, C, and D receive the Pre-Prepare message, they verify the transaction and broadcast a Prepare message to all other nodes (including the primary).
+Verification: Each node waits until it receives Prepare messages from at least ( 2f + 1
+) nodes, including itself.
+
+Phase 3: Commit
+
+Commit Message: After receiving the required number of Prepare messages, each node broadcasts a Commit message to all other nodes.
+Commitment: Each node waits until it receives Commit messages from at least 2f+1 node.
+
+Execution: Once the node receives the necessary Commit messages, it executes the transaction and updates its local state. 
+The node then sends a reply to the client, confirming the completion of the transaction.
+
+
+Code Explaination:
+
 PBFTNode Struct:
 
 Represents a node in the PBFT network.
